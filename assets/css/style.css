@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Cabeçalho */
+header {
+    background-color: darkblue;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111;
+  padding: 15px 40px;
+}
+
+.logo {
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+.menu a:hover {
+  color: #4db8ff;
+}
+
+.carrinho-btn {
+  background-color: #0078ff;
+  padding: 8px 15px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.carrinho-btn:hover {
+  background-color: #005fcc;
+}
+
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.menu input {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+}
+
+.menu button {
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Conteúdo principal */
+main {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.titulo-secao {
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.titulo-secao h2 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Cards de produto */
+.produto {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.produto img {
+    width: 160px;
+    height: auto;
+    object-fit: cover;
+    border-right: 2px solid #ddd;
+}
+
+.produto .info {
+    padding: 15px 20px;
+}
+
+.produto h3 {
+    color: #222;
+    margin-bottom: 8px;
+}
+
+.produto p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #555;
+}
+
+.produto button {
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.produto button:hover {
+    background-color: #3e9142;
+}
+
+/* Destaque inicial */
+.destaque {
+    border: 2px solid #ff6600;
+    background-color: #fff8f0;
+}
+
+/* Rodapé */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+footer .pagamentos {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+footer .pagamentos img {
+    height: 30px;
+}
+
+footer p {
+    font-size: 0.8rem;
+}

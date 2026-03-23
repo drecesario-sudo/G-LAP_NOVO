@@ -1,0 +1,215 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+header {
+  background-color: #222;
+  color: #ddd;
+  padding: 15px;
+}
+
+header h1 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111;
+  padding: 15px 40px;
+}
+
+.logo {
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+.menu a:hover {
+  color: #4db8ff;
+}
+
+.carrinho-btn {
+  background-color: #0078ff;
+  padding: 8px 15px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.carrinho-btn:hover {
+  background-color: #005fcc;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu input {
+  width: 250px;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+.menu nav a {
+  color: #ddd;
+  margin: 0 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+.produto-container {
+  background: white;
+  margin: 30px auto;
+  width: 85%;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.produto-detalhes {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.produto-detalhes img {
+  width: 300px;
+  border-radius: 6px;
+}
+
+.info-produto {
+  flex: 1;
+}
+
+.info-produto h2 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.marca {
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.preco {
+  font-size: 1.8rem;
+  color: #008000;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.comprar {
+  background-color: #008000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.descricao {
+  margin-top: 40px;
+}
+
+.descricao h3 {
+  margin-bottom: 10px;
+}
+
+.descricao p {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.opiniao {
+  margin-top: 40px;
+}
+
+.opiniao h3 {
+  margin-bottom: 20px;
+}
+
+.comentarios {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.comentario {
+  background: #f3f3f3;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+footer {
+  background-color: #222;
+  color: white;
+  padding: 30px 15%;
+  margin-top: 40px;
+}
+
+.footer-sections {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.footer-sections h4 {
+  margin-bottom: 10px;
+}
+
+.footer-sections ul {
+  list-style: none;
+}
+
+.footer-sections li {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.footer-sections img {
+  width: 50px;
+  margin: 5px;
+}
+
+footer p {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #aaa;
+}

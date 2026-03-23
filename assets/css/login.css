@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* ======== GERAL ======== */
+body {
+    font-family: 'Poppins', sans-serif;
+    
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* ======== CABEÇALHO ======== */
+header {
+    background-color: #111;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #1f1f1f;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #4db8ff;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.menu li a:hover {
+    color: #4db8ff;
+}
+
+.carrinho-btn {
+    background-color: #0078ff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.carrinho-btn:hover {
+    background-color: #005fcc;
+}
+
+/* ======== LOGIN ======== */
+.login-container {
+    background-color: #1a1a1a;
+    width: 90%;
+    max-width: 420px;
+    margin: 100px auto;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(77, 184, 255, 0.2);
+    text-align: center;
+}
+
+.login-container h2 {
+    color: #4db8ff;
+    margin-bottom: 10px;
+}
+
+.login-container p {
+    color: #ccc;
+    font-size: 0.9em;
+    margin-bottom: 25px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #ddd;
+}
+
+input {
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    color: #fff;
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #4db8ff;
+    box-shadow: 0 0 8px rgba(77, 184, 255, 0.4);
+}
+
+.login-btn {
+    background-color: #0078ff;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #005fcc;
+    box-shadow: 0 0 12px rgba(77, 184, 255, 0.4);
+}
+
+.links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.links a {
+    color: #4db8ff;
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.links a:hover {
+    color: #fff;
+}
+
+/* ======== RODAPÉ ======== */
+footer {
+    background-color: #111;
+    text-align: center;
+    padding: 25px;
+    margin-top: 80px;
+    color: #aaa;
+    font-size: 0.9em;
+    border-top: 1px solid #1f1f1f;
+}
+
+/* ======== RESPONSIVO ======== */
+@media (max-width: 500px) {
+    .login-container {
+        margin: 60px auto;
+        padding: 30px;
+    }
+
+    .links {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+}
