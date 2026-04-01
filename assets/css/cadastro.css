@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ======== GERAL ======== */
+body {
+    font-family: 'Poppins', sans-serif;
+    
+    color: #fff;
+}
+
+/* ======== CABEÇALHO ======== */
+header {
+    background-color: #111;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #1f1f1f;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #4db8ff;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.menu li a:hover {
+    color: #4db8ff;
+}
+
+.carrinho-btn {
+    background-color: #0078ff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.carrinho-btn:hover {
+    background-color: #005fcc;
+}
+
