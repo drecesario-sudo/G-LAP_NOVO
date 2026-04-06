@@ -10,9 +10,6 @@
 }
 
 body {
-    background-image: url(/assets/imgs/G_LAP_FUNdo.jpg);
-    background-size: cover;
-    background-position: center;
     background-attachment: fixed;
 }
 
@@ -73,12 +70,23 @@ body {
 /* --- HEADER --- */
 header {
     height: 15vh;
-    background: linear-gradient(to right, #0048ff, #00123a);
+    background:linear-gradient(to right, #ffff, #B9D0EB, #1B78BF, #353FF2);
     color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 40px;
+}
+
+.botaoAdcionarAoCarrinho{
+    background-color: #4db8ff;
+    border: #ffff;
+    border-radius: 5px;
+    font-size: 1em;
+    height: 25px;
+    text-align: center;
+    justify-content: center;
+
 }
 
 .navbar {
@@ -161,12 +169,16 @@ main {
 }
 
 /* --- BANNERS --- */
-.banner-meio img {
-    max-height: 500px;
+.banner-meio img{
+    max-height: 700px;
     width: 100%;
     object-fit: cover;
-    border-radius: 10px;
     margin: 30px 0;
+    
+}
+
+.banner-meio{
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2),
 }
 
 .banner-teclado {
