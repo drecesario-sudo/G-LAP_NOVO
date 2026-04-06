@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/assets/css/cadastroDeCliente.css">
+</head>
+
+<body>
+    <form id="formularioCadastro">
+         <H1 id="tituloClientes">Clientes</H1>        
+        <label for="cpf">CPF</label>
+        <input type="text" name="cpf" id="cpf" maxlength="14" autofocus placeholder="000.000.000-00">
+        <span id="mensagemCpf"></span>
+
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" maxlength="100" required placeholder="Exemplo: Boboti da Silva ">
+        <span id="mensagemNome"></span>
+        
+        <label for="cep">CEP</label>
+        <input type="text" name="cep" id="cep" maxlength="9" onblur="buscarEndereco()" placeholder="00000-000">
+        <span id="mensagemCep"></span>
+
+        <label for="uf">UF</label>
+        <input type="text" name="uf" id="uf" maxlength="2" placeholder="00">
+        <span id="mensagemUf"></span>
+
+        <label for="cidade">Cidade</label>
+        <input type="text" name="cidade" id="cidade" maxlength="50" placeholder="Exemplo: Pau fincado">
+        <span id="mensagemCidade"></span>
+
+        <label for="bairro">Bairro</label>
+        <input type="text" name="bairro" id="bairro" maxlength="50" placeholder="Exemplo: Jardim dos Infernos">
+        <span id="mensagemBairro"></span>
+
+        <label for="rua">Rua</label>
+        <input type="text" name="rua" id="rua" maxlength="100" placeholder="Exemplo: Rua dos bobos">
+        <span id="mensagemRua"></span>
+
+        <label for="numero">Número</label>
+        <input type="text" name="numero" id="numero" maxlength="10" placeholder="Numero da casa/local">
+        <span id="mensagemNumero"></span>
+
+        <label for="complemento">Complemento</label>
+        <input type="text" name="complemento" id="complemento" maxlength="100" placeholder="Exemplo: O vizinho tem uma placa anunciando venda de mandioca">
+        <span id="mensagemComplemento"></span>
+
+        <div>
+            <button type="button" class="botao" id="botaoBuscar">Buscar</button>
+            <button type="submit" class="botao" id="botaoCadastrar">Cadastrar</button>
+            <button type="button" class="botao" id="botaoAtualizar">Atualizar</button>
+            <button type="button" class="botao" id="botaoExcluir">Excluir</button>
+        </div>
+
+    </form>
+
+    <script src="./js/index.js"></script>
+</body>
+</html>
