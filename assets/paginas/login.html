@@ -44,5 +44,43 @@
     <footer>
         <p>© 2025 G-LAP Informática — Todos os direitos reservados</p>
     </footer>
+
+    <script>
+    const loginForm = document.querySelector('.login-form');
+
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Impede a página de recarregar
+
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+
+        try {
+            const resposta = await fetch('http://localhost:3000/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, senha })
+            });
+
+            const resultado = await resposta.json();
+
+            if (resposta.ok) {
+                // ✅ SUCESSO: Guardamos o Token e o nome do cliente no localStorage
+                localStorage.setItem('glap_token', resultado.token);
+                localStorage.setItem('glap_user', resultado.cliente);
+
+                alert(`Bem-vindo de volta, ${resultado.cliente}!`);
+                
+                // Redireciona para a página inicial
+                window.location.href = 'index.html';
+            } else {
+                // ❌ ERRO: E-mail ou senha inválidos
+                alert(resultado.mensagem || "Erro ao fazer login.");
+            }
+        } catch (erro) {
+            console.error("Erro na conexão:", erro);
+            alert("Não foi possível conectar ao servidor.");
+        }
+    });
+</script>
 </body>
 </html>
