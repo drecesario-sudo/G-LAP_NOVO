@@ -1,216 +1,245 @@
-/* --- RESET E GERAL --- */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Arial, sans-serif;
-}
-
-body {
-  background-color: #f6f6f6;
-  color: #222;
-}
-
-/* --- HEADER (IDÊNTICO À INDEX) --- */
-header {
-  font-size: 20px;
-  height: 15vh;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 15%, rgba(227, 230, 255, 1) 27%, rgba(210, 212, 244, 1) 37%, rgba(170, 170, 240, 1) 43%, rgba(100, 120, 232, 1) 60%, rgba(13, 58, 222, 0.99) 77%);
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 #g-lap-logo {
-  height: 150px;
+    height: 150px;
+}
+
+body {
+    background-attachment: fixed;
+}
+
+/* --- ESTILO DO CARROSSEL INFINITO (OTIMIZADO PARA FLUIDEZ) --- */
+.carrossel {
+    margin: 60px auto;
+    width: 95%;
+    overflow: hidden; 
+    padding: 20px 0;
+    position: relative;
+    /* Remove qualquer interferência de clique que possa causar lag */
+    pointer-events: auto; 
+}
+
+.group {
+    display: flex;
+    width: max-content;
+    gap: 20px;
+    /* FORÇAR ACELERAÇÃO DE HARDWARE (GPU) */
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    /* Aumentei para 30s para ficar mais suave, ajuste se preferir mais rápido */
+    animation: slide-loop 30s linear infinite;
+}
+
+/* Pausa ao passar o mouse */
+.carrossel:hover .group {
+    animation-play-state: paused;
+}
+
+.card-carrossel {
+    flex: 0 0 200px;
+    height: 300px;
+    width: 300px;
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 3rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    /* Impede que o texto seja selecionado durante o movimento */
+    user-select: none;
+}
+
+@keyframes slide-loop {
+    from {
+        /* Usando translate3d em vez de translateX para performance máxima */
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        /* Move 50% da largura do group + compensação do gap */
+        transform: translate3d(calc(-50% - 10px), 0, 0);
+    }
+}
+
+/* --- HEADER --- */
+header {
+    font-size: 20px;
+    height: 15vh;
+    background: #ffffff;
+background: linear-gradient(90deg, rgba(255, 255, 255, 1) 15%, rgba(227, 230, 255, 1) 27%, rgba(210, 212, 244, 1) 37%, rgba(170, 170, 240, 1) 43%, rgba(100, 120, 232, 1) 60%, rgba(13, 58, 222, 0.99) 77%);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+
+.botaoAdcionarAoCarrinho{
+    background-color: #4db8ff;
+    border: #ffff;
+    border-radius: 5px;
+    font-size: 1em;
+    height: 25px;
+    text-align: center;
+    justify-content: center;
+
 }
 
 .navbar {
-  display: flex;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
 }
 
 .menu {
-  list-style: none;
-  display: flex;
-  gap: 25px;
+    list-style: none;
+    display: flex;
+    gap: 25px;
 }
 
 .menu a {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  transition: color 0.2s ease-in-out;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
 }
 
 .menu a:hover {
-  color: #4db8ff;
+    color: #4db8ff;
 }
 
 .carrinho-btn {
-  background-color: #0078ff;
-  padding: 8px 15px;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  transition: background-color 0.3s;
+    background-color: #0078ff;
+    padding: 8px 15px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
-.carrinho-btn:hover {
-  background-color: #005fcc;
+/* --- MAIN & PRODUTOS --- */
+main {
+    width: 90%;
+    margin: 20px auto;
 }
 
-/* --- CONTEÚDO DO PRODUTO --- */
-.produto-container {
-  background: white;
-  margin: 30px auto;
-  width: 85%;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  padding: 30px;
+.produtos {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
 }
 
-.produto-detalhes {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 30px;
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.15);
+    width: 220px;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s;
 }
 
-.produto-detalhes img {
-  width: 400px;
-  max-width: 100%;
-  border-radius: 6px;
-  object-fit: contain;
+.card:hover {
+    transform: translateY(-5px);
 }
 
-.info-produto {
-  flex: 1;
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
 }
 
-.info-produto h2 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  line-height: 1.3;
-}
-
-.marca {
-  color: #777;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
+.card h4 {
+    font-size: 0.95rem;
+    margin: 10px 0;
 }
 
 .preco {
-  font-size: 2.2rem;
-  color: #008000;
-  font-weight: bold;
-  margin-bottom: 20px;
+    color: #1a1a1a;
+    font-weight: bold;
+    display: block;
+    margin-top: 5px;
 }
 
-.comprar {
-  background-color: #008000;
-  color: white;
-  padding: 15px 40px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
+/* --- BANNERS --- */
+.banner-meio img{
+    max-height: 700px;
+    width: 100%;
+    object-fit: cover;
+    margin: 30px 0;
+    
 }
 
-.comprar:hover {
-  background-color: #006400;
+.banner-meio{
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2),
 }
 
-/* --- DESCRIÇÃO E COMENTÁRIOS --- */
-.descricao {
-  margin-top: 40px;
-}
-
-.descricao h3 {
-  margin-bottom: 15px;
-  border-left: 4px solid #0048ff;
-  padding-left: 10px;
-}
-
-.descricao p {
-  margin-bottom: 15px;
-  line-height: 1.6;
-  color: #444;
-}
-
-.opiniao {
-  margin-top: 50px;
-}
-
-.opiniao h3 {
-  margin-bottom: 20px;
-}
-
-.comentarios {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.comentario {
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  border-left: 3px solid #0078ff;
-}
-
-.comentario strong {
-  display: block;
-  margin-bottom: 5px;
-  color: #222;
+.banner-teclado {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1606813902951-9530a7e0f72a?w=1000');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 50px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 /* --- FOOTER --- */
 footer {
-  background-color: #111;
-  color: white;
-  padding: 40px 10%;
-  margin-top: 50px;
+    background-color: #111;
+    color: white;
+    padding: 40px 30px 20px;
+    margin-top: 50px;
 }
 
-.footer-sections {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 30px;
+footer .links {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    gap: 20px;
 }
 
-.footer-sections h4 {
-  margin-bottom: 15px;
-  border-bottom: 2px solid #0048ff;
-  width: fit-content;
+footer .links div {
+    min-width: 150px;
 }
 
-.footer-sections ul {
-  list-style: none;
-}
-
-.footer-sections li {
-  margin-bottom: 8px;
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-.pagamentos-img img {
-  height: 25px;
-  margin: 5px 10px 5px 0;
+footer h4 {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #0048ff;
+    width: fit-content;
 }
 
 footer p {
-  text-align: center;
-  font-size: 0.8rem;
-  color: #777;
-  margin-top: 30px;
-  border-top: 1px solid #333;
-  padding-top: 20px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+footer img {
+    height: 30px;
+    margin: 5px 10px 5px 0;
+    filter: grayscale(100%) brightness(150%);
+    transition: 0.3s;
+}
+
+footer img:hover {
+    filter: none;
+}
+
+footer > p {
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    color: #777;
 }
