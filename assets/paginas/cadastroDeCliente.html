@@ -9,7 +9,7 @@
 
 <body>
     <form id="formularioCadastro">
-         <H1 id="tituloClientes">Clientes</H1>        
+         <h1 id="tituloClientes">Clientes</h1>
         <label for="cpf">CPF</label>
         <input type="text" name="cpf" id="cpf" maxlength="14" autofocus placeholder="000.000.000-00">
         <span id="mensagemCpf"></span>
@@ -17,7 +17,7 @@
         <label for="nome">Nome completo</label>
         <input type="text" id="nome" name="nome" maxlength="100" required placeholder="Exemplo: Boboti da Silva ">
         <span id="mensagemNome"></span>
-        
+
         <label for="cep">CEP</label>
         <input type="text" name="cep" id="cep" maxlength="9" onblur="buscarEndereco()" placeholder="00000-000">
         <span id="mensagemCep"></span>
@@ -56,5 +56,52 @@
     </form>
 
     <script src="./js/index.js"></script>
+
+    <script>
+    // Seleciona o botão de cadastrar
+    const btnCadastrar = document.getElementById('botaoCadastrar');
+
+    btnCadastrar.addEventListener('click', async function(evento) {
+        evento.preventDefault(); // Impede a página de recarregar
+        
+        // Recolhe os dados dos inputs
+        const dadosCliente = {
+            nome: document.getElementById('nome').value,
+            cpf: document.getElementById('cpf').value,
+            cep: document.getElementById('cep').value,
+            uf: document.getElementById('uf').value,
+            cidade: document.getElementById('cidade').value,
+            bairro: document.getElementById('bairro').value,
+            rua: document.getElementById('rua').value,
+            numero: document.getElementById('numero').value,
+            complemento: document.getElementById('complemento').value,
+            email: "email_exemplo@glap.com", // Adicione um campo de email no seu HTML se não tiver
+            senha: "senha123" // Adicione um campo de senha no seu HTML se não tiver
+        };
+
+        try {
+            // Envia os dados para a API
+            const resposta = await fetch('http://localhost:3000/api/clientes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosCliente)
+            });
+
+            const resultado = await resposta.json();
+
+            if (resposta.status === 201) {
+                alert("🎉 " + resultado.mensagem);
+                window.location.href = "login.html"; // Redireciona para o login após o registo
+            } else {
+                alert("❌ Erro: " + resultado.mensagem);
+            }
+        } catch (erro) {
+            console.error(erro);
+            alert("Erro de comunicação com o servidor.");
+        }
+    });
+</script>
 </body>
 </html>
