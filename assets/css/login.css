@@ -11,12 +11,18 @@ body {
 
 /* ======== CABEÇALHO ======== */
 header {
-    background-color: #111;
-    padding: 15px 50px;
+    height: 15vh;
+    background:linear-gradient(to right, #ffff, #B9D0EB, #1B78BF, #353FF2);
+    color: #fff;
     display: flex;
-    justify-content: center;
-    border-bottom: 2px solid #1f1f1f;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
 }
+#g-lap-logo {
+    height: 150px;
+}
+
 
 .navbar {
     display: flex;
@@ -26,11 +32,7 @@ header {
     align-items: center;
 }
 
-.logo {
-    font-size: 1.6em;
-    font-weight: 700;
-    color: #4db8ff;
-}
+
 
 .menu {
     list-style: none;
@@ -66,7 +68,7 @@ header {
 
 /* ======== LOGIN ======== */
 .login-container {
-    background-color: #1a1a1a;
+    background-color: #ffffff;
     width: 90%;
     max-width: 420px;
     margin: 100px auto;
@@ -82,7 +84,7 @@ header {
 }
 
 .login-container p {
-    color: #ccc;
+    color: #1f1f1f;
     font-size: 0.9em;
     margin-bottom: 25px;
 }
@@ -96,13 +98,14 @@ header {
 label {
     font-weight: 600;
     margin-bottom: 5px;
-    color: #ddd;
+    color: #aaa;
 }
 
 input {
-    background-color: #111;
-    border: 1px solid #333;
+    background-color: #ffffff;
+    border: 1px solid #ffffff ;
     border-radius: 8px;
+    border-color: #111;
     padding: 10px;
     color: #fff;
     font-size: 0.95em;
