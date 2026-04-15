@@ -16,9 +16,9 @@ body {
 /* --- ESTILO DO CARROSSEL INFINITO (OTIMIZADO PARA FLUIDEZ) --- */
 .carrossel {
     margin: 60px auto;
-    width: 95%;
+    width: 90%;
     overflow: hidden; 
-    padding: 20px 0;
+    padding: 0;
     position: relative;
     /* Remove qualquer interferência de clique que possa causar lag */
     pointer-events: auto; 
@@ -63,7 +63,7 @@ body {
     }
     to {
         /* Move 50% da largura do group + compensação do gap */
-        transform: translate3d(calc(-50% - 10px), 0, 0);
+        transform: translate3d(calc(-40% - 10px), 0, 0);
     }
 }
 
@@ -71,8 +71,7 @@ body {
 header {
     font-size: 20px;
     height: 15vh;
-    background: #ffffff;
-background: linear-gradient(90deg, rgba(255, 255, 255, 1) 15%, rgba(227, 230, 255, 1) 27%, rgba(210, 212, 244, 1) 37%, rgba(170, 170, 240, 1) 43%, rgba(100, 120, 232, 1) 60%, rgba(13, 58, 222, 0.99) 77%);
+    background:linear-gradient(to right, #ffff, #B9D0EB, #1B78BF, #353FF2);
     color: #fff;
     display: flex;
     justify-content: space-between;
@@ -126,8 +125,9 @@ background: linear-gradient(90deg, rgba(255, 255, 255, 1) 15%, rgba(227, 230, 25
 
 /* --- MAIN & PRODUTOS --- */
 main {
-    width: 90%;
-    margin: 20px auto;
+    width: 100%;
+    margin: 2px auto;
+    background-color: rgb(251,247,245); 
 }
 
 .produtos {
@@ -173,33 +173,32 @@ main {
 /* --- BANNERS --- */
 .banner-meio img{
     max-height: 700px;
-    width: 100%;
+    width: 95%;
     object-fit: cover;
-    margin: 30px 0;
-    
-}
-
-.banner-meio{
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2),
+    margin: 30px 20px 30px 20px;
+    border-radius: 10px;
+    box-shadow: 12px 10px 18px 2px rgba(0,0,0,0.18);
+    -webkit-box-shadow: 12px 10px 18px 2px rgba(0,0,0,0.18);
+    -moz-box-shadow: 12px 10px 18px 2px rgba(0,0,0,0.18);
 }
 
 .banner-teclado {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1606813902951-9530a7e0f72a?w=1000');
+    background: linear-gradient(rgba(1, 102, 255, 0.5), rgba(14, 11, 194, 0.5)), url('https://images.unsplash.com/photo-1606813902951-9530a7e0f72a?w=1000');
     background-size: cover;
     background-position: center;
     color: white;
     padding: 50px;
     border-radius: 10px;
     text-align: center;
-    margin-bottom: 30px;
+    margin: 30px 20px 30px 20px;
 }
 
 /* --- FOOTER --- */
 footer {
-    background-color: #111;
+    background-color: #02013d;
     color: white;
     padding: 40px 30px 20px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
 }
 
 footer .links {
