@@ -69,8 +69,10 @@ body {
 
 /* --- HEADER --- */
 header {
+    font-size: 20px;
     height: 15vh;
-    background:linear-gradient(to right, #ffff, #B9D0EB, #1B78BF, #353FF2);
+    background: #ffffff;
+background: linear-gradient(90deg, rgba(255, 255, 255, 1) 15%, rgba(227, 230, 255, 1) 27%, rgba(210, 212, 244, 1) 37%, rgba(170, 170, 240, 1) 43%, rgba(100, 120, 232, 1) 60%, rgba(13, 58, 222, 0.99) 77%);
     color: #fff;
     display: flex;
     justify-content: space-between;

@@ -11,23 +11,24 @@ body {
 }
 
 header {
-  background-color: #222;
-  color: #ddd;
-  padding: 15px 8%;
+    height: 15vh;
+    background:linear-gradient(to right, #ffff, #B9D0EB, #1B78BF, #353FF2);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
 }
 
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #111;
-  padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
 }
 
-.logo {
-  color: white;
-  font-size: 1.5em;
-  font-weight: bold;
+#g-lap-logo {
+    height: 150px;
 }
 
 .menu {
