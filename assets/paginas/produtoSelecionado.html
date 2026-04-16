@@ -7,17 +7,7 @@
   <link rel="stylesheet" href="/assets/css/produtoSelecionado.css">
 </head>
 <body>
-  <header>
-
-    <div class="menu">
-      <input type="text" placeholder="Buscar produto...">
-     <nav class="navbar">
-
-
-    <ul class="menu">
-
-  
- <header>
+    <header>
         <img src="assets/imgs/GLAPlogoSemfundo.png" id="g-lap-logo" alt="Logo G-LAP">
         <nav class="navbar">
             <ul class="menu">
@@ -27,7 +17,7 @@
             </ul>
         </nav>
     </header>
-    
+
   <main class="produto-container">
     <section class="produto-detalhes">
       <img src="/assets/imgs/monitores/aoc-gaming.jpg" alt="Monitor AOC">
@@ -101,5 +91,38 @@
     </div>
     <p>© 2025 G-LAP Informática - Todos os direitos reservados.</p>
   </footer>
+  <script>
+    async function carregarProduto() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        if (!id) return;
+
+        try {
+            const resposta = await fetch(`http://localhost:3000/api/produtos/${id}`);
+            const produto = await resposta.json();
+
+            // Atualiza a interface com dados reais
+            document.querySelector('.produto-detalhes img').src = produto.imagem;
+            document.querySelector('.info-produto h2').innerText = produto.nome;
+            document.querySelector('.info-produto .preco').innerText = `R$ ${produto.preco.toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
+            document.querySelector('.descricao p:last-child').innerText = produto.descricao || "Descrição premium G-LAP.";
+
+            // Configura o botão comprar
+            document.querySelector('.comprar').onclick = () => {
+                adicionarAoCarrinho(produto);
+                window.location.href = 'carrinho.html';
+            };
+        } catch (erro) { console.error("Erro:", erro); }
+    }
+
+    function adicionarAoCarrinho(produto) {
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        const index = carrinho.findIndex(item => item.id === produto.id);
+        if (index > -1) { carrinho[index].quantidade++; } 
+        else { carrinho.push({ ...produto, quantidade: 1 }); }
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    }
+    carregarProduto();
+</script>
 </body>
 </html>

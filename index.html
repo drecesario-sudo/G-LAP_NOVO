@@ -12,8 +12,8 @@
         <nav class="navbar">
             <ul class="menu">
                 <li><a href="index.html">Catálogo</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="carrinho.html" class="carrinho-btn">🛒 Carrinho</a></li>
+                <li><a href="/assets/paginas/login.html">Login</a></li>
+                <li><a href="/assets/paginas/carrinho.html" class="carrinho-btn">🛒 Carrinho</a></li>
             </ul>
         </nav>
     </header>
@@ -139,5 +139,56 @@
         </div>
         <p>© 2025 G-LAP Informática — Todos os direitos reservados</p>
     </footer>
+    <script>
+    // 1. Função para levar aos detalhes
+    function irParaProduto(id) {
+        window.location.href = `assets/paginas/produtoSelecionado.html?id=${id}`;
+    }
+
+    // 2. Função para adicionar sem sair da página
+    function adicionarAoCarrinhoRapido(produto) {
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        const itemExistente = carrinho.find(item => item.id === produto.id);
+
+        if (itemExistente) {
+            itemExistente.quantidade++;
+        } else {
+            carrinho.push({ ...produto, quantidade: 1 });
+        }
+
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        alert("🛒 Adicionado ao carrinho!");
+    }
+
+    // 3. Carregar produtos do Banco
+    async function carregarProdutos() {
+        try {
+            const resposta = await fetch('http://localhost:3000/api/produtos');
+            const produtos = await resposta.json();
+            const container = document.querySelector('.produtos.monitores');
+            container.innerHTML = ""; 
+
+            produtos.forEach(prod => {
+                // Prepara o objeto para ser passado no clique do botão
+                const prodRef = JSON.stringify(prod).replace(/"/g, '&quot;');
+                
+                container.innerHTML += `
+                    <div class="card" onclick="irParaProduto(${prod.id})" style="cursor:pointer">
+                        <img src="${prod.imagem}" alt="${prod.nome}">
+                        <h4>${prod.nome}</h4>
+                        <span class="preco">R$ ${prod.preco.toLocaleString('pt-br', {minimumFractionDigits: 2})}</span>
+                        <button class="botaoAdcionarAoCarrinho" 
+                                onclick="event.stopPropagation(); adicionarAoCarrinhoRapido(${prodRef})">
+                            Adicionar ao carrinho
+                        </button>
+                    </div>
+                `;
+            });
+        } catch (erro) {
+            console.error("Erro ao conectar com a API:", erro);
+        }
+    }
+    carregarProdutos();
+</script>
 </body>
 </html>
