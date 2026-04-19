@@ -192,7 +192,7 @@ main {
 }
 
 .banner-teclado {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1606813902951-9530a7e0f72a?w=1000');
+    background: linear-gradient(rgba(8, 53, 253, 0.5), rgba(113, 62, 255, 0.5)), url('https://images.unsplash.com/photo-1606813902951-9530a7e0f72a?w=1000');
     background-size: cover;
     background-position: center;
     color: white;

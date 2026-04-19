@@ -59,16 +59,12 @@ function render() {
       p.nome.toLowerCase().includes(state.query.toLowerCase())
   );
   
-  if (state.sort === 'priceAsc') filtered.sort((a,b) => a.preco - b.preco);
-  if (state.sort === 'priceDesc') filtered.sort((a,b) => b.preco - a.preco);
-
-  // Renderizar a Grade de Produtos na tela
   const grid = el('productGrid');
   if (grid) {
       grid.innerHTML = '';
       filtered.forEach(p => {
         const div = document.createElement('div');
-        div.className = 'product-card'; // Adapte para a classe real do seu CSS
+        div.className = 'product-card';
         div.innerHTML = `
           <img src="${p.imagem_url || 'https://via.placeholder.com/640x400?text=Sem+Imagem'}" alt="${p.nome}">
           <div class="content">

@@ -27,7 +27,6 @@ header {
 .navbar {
     display: flex;
     justify-content: space-between;
-    width: 100%;
     max-width: 1200px;
     align-items: center;
 }
@@ -149,7 +148,7 @@ input:focus {
 }
 
 .links a:hover {
-    color: #fff;
+    color: #005fcc;
 }
 
 /* ======== RODAPÉ ======== */

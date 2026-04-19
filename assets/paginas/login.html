@@ -33,7 +33,7 @@
                 <button type="submit" class="login-btn">Entrar</button>
 
                 <div class="links">
-                    <a href="/assets/paginas/">Esqueceu a senha?</a>
+                    <a href="/assets/paginas/esqueci.html">Esqueceu a senha?</a>
                     <a href="/assets/paginas/cadastro.html">Criar nova conta</a>
                 </div>
             </form>
@@ -48,12 +48,12 @@
     const loginForm = document.querySelector('.login-form');
 
     loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Impede a página de recarregar
-
+        e.preventDefault();
         const email = document.getElementById('email').value;
         const senha = document.getElementById('senha').value;
 
         try {
+            // URL da sua API no outro ambiente/pasta
             const resposta = await fetch('http://localhost:3000/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -63,21 +63,21 @@
             const resultado = await resposta.json();
 
             if (resposta.ok) {
-                // ✅ SUCESSO: Guardamos o Token e o nome do cliente no localStorage
+                // Salva os dados retornados pela sua API
                 localStorage.setItem('glap_token', resultado.token);
                 localStorage.setItem('glap_user', resultado.cliente);
 
-                alert(`Bem-vindo de volta, ${resultado.cliente}!`);
+                alert(`Bem-vindo, ${resultado.cliente}!`);
                 
-                // Redireciona para a página inicial
-                window.location.href = 'index.html';
+                // Redireciona de forma inteligente
+                window.location.href = document.referrer.includes('carrinho.html') 
+                    ? 'carrinho.html' 
+                    : '../../index.html';
             } else {
-                // ❌ ERRO: E-mail ou senha inválidos
-                alert(resultado.mensagem || "Erro ao fazer login.");
+                alert(resultado.mensagem || "Erro no login");
             }
         } catch (erro) {
-            console.error("Erro na conexão:", erro);
-            alert("Não foi possível conectar ao servidor.");
+            alert("Não foi possível conectar ao servidor de autenticação.");
         }
     });
 </script>

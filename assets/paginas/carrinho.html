@@ -1,13 +1,74 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrinho de Compras - G-LAP</title>
-  <link rel="stylesheet" href="/assets/css/carrinho.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - G-LAP</title>
+    <link rel="stylesheet" href="/assets/css/carrinho.css">
+    <style>
+        /* Estilos específicos para os novos botões */
+        .controles-qtd {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 10px 0;
+            background: #f4f4f4;
+            padding: 5px 10px;
+            border-radius: 20px;
+            width: fit-content;
+        }
+
+        .controles-qtd button {
+            background: #fff;
+            border: 1px solid #ddd;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .controles-qtd button:hover {
+            background: #333;
+            color: #fff;
+        }
+
+        .btn-remover-item {
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-decoration: underline;
+            margin-top: 5px;
+        }
+
+        .item-carrinho {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .item-carrinho img {
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .item-info {
+            flex-grow: 1;
+        }
+
+        .subtotal-unitario {
+            font-weight: bold;
+            color: #2ecc71;
+        }
+    </style>
 </head>
 <body>
-  <header>
+    <header>
         <img src="/assets/imgs/GLAPlogoSemfundo.png" id="g-lap-logo" alt="Logo G-LAP">
         <nav class="navbar">
             <ul class="menu">
@@ -18,176 +79,162 @@
         </nav>
     </header>
 
-  <main>
-    <h2>Meu Carrinho</h2>
+    <main>
+        <h2>Meu Carrinho</h2>
 
-    <section class="carrinho-container">
-      <div class="itens-carrinho">
-        </div>
+        <section class="carrinho-container">
+            <div class="itens-carrinho"></div>
 
-      <aside class="resumo">
-        <div class="resumo-header">
-          <h3>Resumo</h3>
-          <button type="button" class="limpar" onclick="limparCarrinho()">Limpar Carrinho</button>
-        </div>
-        <div class="valores">
-          <p>Subtotal: <span>R$ 0,00</span></p>
-          <p>Frete: <span>Grátis</span></p>
-        </div>
-        <div class="total">
-          <p>A vista no Pix</p>
-          <h2>R$ 0,00</h2>
-          <small id="parcelado">12x de R$ 0,00</small>
-        </div>
-
-        <div style="margin: 15px 0;">
-          <label style="font-size: 0.9rem;"></label>Forma de Pagamento:</label>
-          <select id="metodo_pagamento" style="width: 100%; padding: 8px; border-radius: 4px;">
-            <option value="Pix">Pix</option>
-            <option value="Cartão de Crédito">Cartão de Crédito</option>
-            <option value="Boleto">Boleto</option>
-          </select>
-        </div>
-
-        <button type="button" class="finalizar" onclick="finalizarPedido()">Finalizar Pedido</button>
-
-        <div class="opcoes">
-          <button type="button" class="frete">Frete e Prazos</button>
-          <button type="button" class="cupom">Cupom de Desconto</button>
-        </div>
-      </aside>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-sections">
-      <div>
-        <h4>Tipos de Pagamentos</h4>
-        <div class="pagamentos">
-            <img src="/assets/imgs/pagamentos/visa.png" alt="Visa">
-            <img src="/assets/imgs/pagamentos/mastercard.png" alt="Mastercard">
-            <img src="/assets/imgs/pagamentos/pix.png" alt="Pix">
-            <img src="/assets/imgs/pagamentos/boleto.png" alt="Boleto">
-        </div>
-      </div>
-    </div>
-    <p>© 2025 G-LAP Informática - Todos os direitos reservados.</p>
-  </footer>
-
-  <script>
-    const container = document.querySelector('.itens-carrinho');
-
-    // 1. RENDERIZA OS ITENS NA TELA
-    function renderizarCarrinho() {
-        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-        container.innerHTML = ""; 
-        let subtotal = 0;
-
-        if (carrinho.length === 0) {
-            container.innerHTML = "<p style='padding:20px;'>Seu carrinho está vazio.</p>";
-            atualizarResumo(0);
-            return;
-        }
-
-        carrinho.forEach((item, index) => {
-            // Se o seu objeto usa 'preco' ou 'price', ajuste aqui para bater com o localStorage
-            const precoUnitario = item.preco || item.price || 0;
-            const valorTotalItem = precoUnitario * item.quantidade;
-            subtotal += valorTotalItem;
-
-            container.innerHTML += `
-                <div class="item">
-                    <img src="${item.imagem}" alt="${item.nome}">
-                    <div class="detalhes">
-                        <h3>${item.nome}</h3>
-                        <p>Total: <span class="preco">R$ ${valorTotalItem.toLocaleString('pt-br', {minimumFractionDigits: 2})}</span></p>
-                        <div class="quantidade">
-                            <button type="button" onclick="mudarQtd(${index}, -1)">-</button>
-                            <span>${item.quantidade}</span>
-                            <button type="button" onclick="mudarQtd(${index}, 1)">+</button>
-                        </div>
-                    </div>
+            <aside class="resumo">
+                <div class="resumo-header">
+                    <h3>Resumo</h3>
+                    <button type="button" class="limpar" onclick="limparCarrinho()">Limpar Carrinho</button>
                 </div>
-            `;
-        });
-        atualizarResumo(subtotal);
-    }
+                <div class="valores">
+                    <p>Subtotal: <span id="subtotal-geral">R$ 0,00</span></p>
+                    <p>Frete: <span>Grátis</span></p>
+                </div>
+                <div class="total">
+                    <p>À vista no Pix</p>
+                    <h2 id="total-final">R$ 0,00</h2>
+                    <small id="parcelado">12x de R$ 0,00</small>
+                </div>
 
-    // 2. ALTERA QUANTIDADE OU REMOVE
-    function mudarQtd(index, delta) {
-        let carrinho = JSON.parse(localStorage.getItem('carrinho'));
-        carrinho[index].quantidade += delta;
-        if (carrinho[index].quantidade <= 0) { carrinho.splice(index, 1); }
-        localStorage.setItem('carrinho', JSON.stringify(carrinho));
-        renderizarCarrinho();
-    }
+                <div style="margin: 15px 0;">
+                    <label>Forma de Pagamento:</label>
+                    <select id="metodo_pagamento" style="width: 100%; padding: 8px; border-radius: 4px;">
+                        <option value="Pix">Pix</option>
+                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                        <option value="Boleto">Boleto</option>
+                    </select>
+                </div>
 
-    // 3. ATUALIZA OS VALORES NO RESUMO (LADO DIREITO)
-    function atualizarResumo(valor) {
-        document.querySelector('.valores p span').innerText = `R$ ${valor.toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
-        document.querySelector('.total h2').innerText = `R$ ${valor.toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
-        document.getElementById('parcelado').innerText = `12x de R$ ${(valor / 12).toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
-    }
+                <button type="button" class="finalizar" onclick="finalizarPedido()">Finalizar Pedido</button>
+            </aside>
+        </section>
+    </main>
 
-    function limparCarrinho() {
-        localStorage.removeItem('carrinho');
-        renderizarCarrinho();
-    }
+    <script src="../js/main.js"></script>
+    <script>
+        const container = document.querySelector('.itens-carrinho');
 
-    // 4. ENVIA O PEDIDO PARA O BACKEND (API)
-    async function finalizarPedido() {
-        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-        const token = localStorage.getItem('token'); // Pega o token salvo no login
+        function renderizarCarrinho() {
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            container.innerHTML = ""; 
+            let totalGeral = 0;
 
-        if (!token) {
-            alert("Atenção: Você precisa fazer login para finalizar a compra!");
-            window.location.href = "/assets/paginas/login.html";
-            return;
-        }
+            if (carrinho.length === 0) {
+                container.innerHTML = `<div style="padding: 40px; text-align: center;">
+                    <p>Seu carrinho está vazio.</p>
+                    <a href="/index.html" style="color: #3498db;">Voltar para a loja</a>
+                </div>`;
+                atualizarInterface(0);
+                return;
+            }
 
-        if (carrinho.length === 0) {
-            alert("Seu carrinho está vazio!");
-            return;
-        }
+            carrinho.forEach((item, index) => {
+                const subtotalItem = item.preco * item.quantidade;
+                totalGeral += subtotalItem;
 
-        // Prepara os dados para o server.js
-        // Mapeamos o carrinho para garantir que as chaves sejam: id, qty, price
-        const dadosPedido = {
-            valor_total: parseFloat(document.querySelector('.total h2').innerText.replace("R$", "").replace(".", "").replace(",", ".")),
-            metodo_pagamento: document.getElementById('metodo_pagamento').value,
-            carrinho: carrinho.map(item => ({
-                id: item.id, // ID do produto no banco
-                qty: item.quantidade,
-                price: item.preco || item.price
-            }))
-        };
-
-        try {
-            const response = await fetch('http://localhost:3000/api/pedidos', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': token // Envia o Token JWT
-                },
-                body: JSON.stringify(dadosPedido)
+                container.innerHTML += `
+                    <div class="item-carrinho">
+                        <img src="${item.imagem}" width="90" height="90">
+                        <div class="item-info">
+                            <h3>${item.nome}</h3>
+                            <p class="subtotal-unitario">R$ ${item.preco.toLocaleString('pt-br', {minimumFractionDigits: 2})}</p>
+                            
+                            <div class="controles-qtd">
+                                <button onclick="alterarQuantidade(${index}, -1)">-</button>
+                                <span>${item.quantidade}</span>
+                                <button onclick="alterarQuantidade(${index}, 1)">+</button>
+                            </div>
+                            
+                            <button class="btn-remover-item" onclick="removerDoCarrinho(${index})">Remover produto</button>
+                        </div>
+                        <div class="item-total-col">
+                            <p>Total: R$ ${subtotalItem.toLocaleString('pt-br', {minimumFractionDigits: 2})}</p>
+                        </div>
+                    </div>`;
             });
 
-            const result = await response.json();
-
-            if (response.ok) {
-                alert(`🚀 Pedido #${result.id_pedido} realizado com sucesso!`);
-                localStorage.removeItem('carrinho');
-                window.location.href = "/index.html"; // Ou uma página de sucesso
-            } else {
-                alert("Erro ao finalizar: " + result.erro);
-            }
-        } catch (error) {
-            console.error(error);
-            alert("Erro de conexão com o servidor G-LAP.");
+            atualizarInterface(totalGeral);
         }
-    }
 
-    renderizarCarrinho();
-  </script>
+        function alterarQuantidade(index, valor) {
+            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            
+            carrinho[index].quantidade += valor;
+
+            if (carrinho[index].quantidade <= 0) {
+                return removerDoCarrinho(index);
+            }
+
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            renderizarCarrinho();
+        }
+
+        function removerDoCarrinho(index) {
+            let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            carrinho.splice(index, 1);
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            renderizarCarrinho();
+        }
+
+        function limparCarrinho() {
+            if (confirm("Tem certeza que deseja limpar todo o carrinho?")) {
+                localStorage.removeItem('carrinho');
+                renderizarCarrinho();
+            }
+        }
+
+        function atualizarInterface(total) {
+            document.getElementById('subtotal-geral').innerText = `R$ ${total.toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
+            document.getElementById('total-final').innerText = `R$ ${total.toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
+            document.getElementById('parcelado').innerText = `12x de R$ ${(total / 12).toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
+        }
+
+        async function finalizarPedido() {
+            const token = localStorage.getItem('glap_token');
+            const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+            if (carrinho.length === 0) return alert("Seu carrinho está vazio!");
+            if (!token) {
+                alert("Login necessário!");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const totalTexto = document.getElementById('total-final').innerText;
+            const totalLimpo = parseFloat(totalTexto.replace("R$ ", "").replace(".", "").replace(",", "."));
+
+            const dados = {
+                valor_total: totalLimpo,
+                metodo_pagamento: document.getElementById('metodo_pagamento').value,
+                carrinho: carrinho.map(i => ({ id: i.id, qty: i.quantidade, price: i.preco }))
+            };
+
+            try {
+                const res = await fetch('http://localhost:3000/api/pedidos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+                    body: JSON.stringify(dados)
+                });
+
+                if (res.ok) {
+                    alert("Pedido confirmado!");
+                    localStorage.removeItem('carrinho');
+                    window.location.href = "../../index.html";
+                } else {
+                    const erro = await res.json();
+                    alert("Erro: " + erro.erro);
+                }
+            } catch (err) {
+                alert("Erro ao conectar com o servidor.");
+            }
+        }
+
+        // Inicia a página carregando o que está no LocalStorage
+        renderizarCarrinho();
+    </script>
 </body>
 </html>

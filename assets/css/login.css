@@ -19,15 +19,14 @@ header {
     align-items: center;
     padding: 15px 40px;
 }
+
 #g-lap-logo {
     height: 150px;
 }
 
-
 .navbar {
     display: flex;
     justify-content: space-between;
-    width: 100%;
     max-width: 1200px;
     align-items: center;
 }
@@ -107,7 +106,7 @@ input {
     border-radius: 8px;
     border-color: #111;
     padding: 10px;
-    color: #fff;
+    color: black;
     font-size: 0.95em;
     margin-bottom: 20px;
     transition: border 0.3s, box-shadow 0.3s;
@@ -149,7 +148,7 @@ input:focus {
 }
 
 .links a:hover {
-    color: #fff;
+    color: #005fcc;
 }
 
 /* ======== RODAPÉ ======== */

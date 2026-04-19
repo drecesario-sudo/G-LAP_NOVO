@@ -1,94 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro ao Cliente</title>
+    <title>Cadastro - G-LAP</title>
     <link rel="stylesheet" href="/assets/css/cadastro.css">
 </head>
 <body>
     <header>
-        <h1 class="logo">G-lap</h1>
-        <div class="menu">
-          <input type="text" placeholder="O que você procura?">
-          <nav class="navbar">
+        <img src="/assets/imgs/GLAPlogoSemfundo.png" id="g-lap-logo" alt="Logo G-LAP">
+        <nav class="navbar">
             <ul class="menu">
                 <li><a href="/index.html">Catálogo</a></li>
                 <li><a href="/assets/paginas/login.html">Login</a></li>
                 <li><a href="/assets/paginas/carrinho.html" class="carrinho-btn">🛒 Carrinho</a></li>
             </ul>
-          </nav>
-        </div>
+        </nav>
     </header>
+
     <main>
         <section class="login-container">
-            <h2>Cadastra-se</h2>
-            <p>Bem-vindo! Faça seu cadastro para inisiar suas comprando.</p>
+            <h2>Cadastre-se</h2>
+            <p>Bem-vindo! Faça seu cadastro para iniciar suas compras.</p>
 
-            <form action="#" method="post" class="login-form">
+            <form id="formCadastro" class="login-form">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" placeholder="Digite seu nome" required>
+
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                <input type="email" id="email" placeholder="Digite seu e-mail" required>
 
                 <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required autocomplete="new-password">
+                <input type="password" id="senha" placeholder="Digite sua senha" required>
 
-                <label for="senha">Confirmação de Senha</label>
-                <input type="password" id="confSenha" name="confSenha" placeholder="Repita sua senha" required autocomplete="new-password">
+                <label for="confSenha">Confirmação de Senha</label>
+                <input type="password" id="confSenha" placeholder="Repita sua senha" required>
 
-                <button type="submit" class="login-btn">Entrar</button>
+                <button type="submit" class="login-btn">Criar Conta</button>
 
                 <div class="links">
-                    <a href="#">Esqueceu a senha?</a>
-                    <a href="/assets/paginas/login.html">Deseja fazer Login?</a>
+                    <a href="/assets/paginas/login.html">Já tem conta? Faça Login</a>
                 </div>
             </form>
         </section>
     </main>
+    
     <footer>
-        <div class="footer-sections">
-          <div>
-            <h4>Departamentos</h4>
-            <ul>
-              <li>Hardware</li>
-              <li>Computadores</li>
-              <li>Monitores</li>
-              <li>Eletrônicos</li>
-              <li>Casa inteligente</li>
-              <li>Periféricos</li>
-            </ul>
-          </div>
+        <p>© 2025 G-LAP Informática — Todos os direitos reservados</p>
+    </footer>
 
-          <div>
-            <h4>Ajuda</h4>
-            <ul>
-              <li>SAC</li>
-              <li>Fale Conosco</li>
-              <li>Termos de Uso</li>
-              <li>Política de Privacidade</li>
-            </ul>
-          </div>
+    <script>
+        document.getElementById('formCadastro').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            const confSenha = document.getElementById('confSenha').value;
 
-          <div>
-            <h4>Dúvidas</h4>
-            <ul>
-              <li>Entrega</li>
-              <li>Garantia</li>
-              <li>Formas de Pagamento</li>
-              <li>Sobre Boletos</li>
-            </ul>
-          </div>
+            if (senha !== confSenha) {
+                return alert("As senhas não coincidem!");
+            }
 
-          <div>
-            <h4>Tipos de Pagamentos</h4>
-            <div class="pagamentos">
-              <img src="/assets/imgs/pagamentos/visa.png" alt="Visa">
-                <img src="/assets/imgs/pagamentos/mastercard.png" alt="Mastercard">
-                <img src="/assets/imgs/pagamentos/pix.png" alt="Pix">
-                <img src="/assets/imgs/pagamentos/boleto.png" alt="Boleto">
-            </div>
-          </div>
-        </div>
-        <p>© 2025 G-LAP Informática - Todos os direitos reservados.</p>
-      </footer>
+            try {
+                const resposta = await fetch('http://localhost:3000/api/clientes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome, email, senha })
+                });
+
+                const resultado = await resposta.json();
+                if (resposta.ok) {
+                    alert("Cadastro realizado com sucesso!");
+                    window.location.href = 'login.html';
+                } else {
+                    alert(resultado.mensagem);
+                }
+            } catch (erro) {
+                alert("Erro ao conectar com o servidor.");
+            }
+        });
+    </script>
 </body>
 </html>

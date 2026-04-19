@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <img src="assets/imgs/GLAPlogoSemfundo.png" id="g-lap-logo" alt="Logo G-LAP">
+        <img src="/assets/imgs/GLAPlogoSemfundo.png" id="g-lap-logo" alt="Logo G-LAP">
         <nav class="navbar">
             <ul class="menu">
                 <li><a href="/index.html">Catálogo</a></li>
@@ -37,83 +37,56 @@
         para uma jogabilidade sem distorção. A certificação HDR400 garante brilho máximo de 400 nits, cores vibrantes (100% sRGB, 117% sRGB) e contraste profundo.
       </p>
     </section>
-
-    <section class="opiniao">
-      <h3>Opiniões do Produto</h3>
-      <div class="comentarios">
-        <div class="comentario">
-          <p><strong>José Marcos</strong></p>
-          <p>Excelente qualidade de tela! Vale cada centavo.</p>
-        </div>
-        <div class="comentario">
-          <p><strong>Ana Luiza</strong></p>
-          <p>Bem acima da média! Cores vivas e resposta rápida.</p>
-        </div>
-        <div class="comentario">
-          <p><strong>Rafael Andrade</strong></p>
-          <p>Perfeito para jogar CS2! Visual incrível.</p>
-        </div>
-        <div class="comentario">
-          <p><strong>Daniel Souza</strong></p>
-          <p>O brilho é muito bom, não cansa os olhos.</p>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer>
-    <div class="footer-sections">
-      <div>
-        <h4>Departamentos</h4>
-        <ul>
-          <li>Monitores</li>
-          <li>Teclados</li>
-          <li>Mouses</li>
-          <li>Headsets</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Ajuda</h4>
-        <ul>
-          <li>Fale Conosco</li>
-          <li>Política de Trocas</li>
-          <li>Entrega</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Pagamento</h4>
-        <div class="pagamentos-img">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Mastercard_2019_logo.svg" alt="Mastercard">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Boleto_logo.svg" alt="Boleto">
+        <div class="links">
+            <div>
+                <h4>Departamentos</h4>
+                <p>Monitores<br>Periféricos<br>Hardware<br>Consoles</p>
+            </div>
+            <div>
+                <h4>Ajuda</h4>
+                <p>Suporte<br>Contato<br>Rastrear pedido<br>Garantia</p>
+            </div>
+            <div>
+                <h4>Políticas</h4>
+                <p>Entrega<br>Trocas e devoluções<br>Pagamentos<br>Privacidade</p>
+            </div>
+            <div>
+                <h4>Formas de pagamento</h4>
+                <img src="/assets/imgs/pagamentos/visa.png" alt="Visa">
+                <img src="/assets/imgs/pagamentos/mastercard.png" alt="MasterCard"> <br>
+                <img src="/assets/imgs/pagamentos/boleto.png" alt="Boleto">
+                <img src="/assets/imgs/pagamentos/pix.png" alt="Pix">
+            </div>
         </div>
-      </div>
-    </div>
-    <p>© 2025 G-LAP Informática - Todos os direitos reservados.</p>
-  </footer>
+        <p>© 2025 G-LAP Informática — Todos os direitos reservados</p>
+    </footer>
   <script>
     async function carregarProduto() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id');
-        if (!id) return;
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    if (!id) return;
 
-        try {
-            const resposta = await fetch(`http://localhost:3000/api/produtos/${id}`);
-            const produto = await resposta.json();
+    try {
+        const resposta = await fetch(`http://localhost:3000/api/produtos/${id}`);
+        const produto = await resposta.json();
 
-            // Atualiza a interface com dados reais
-            document.querySelector('.produto-detalhes img').src = produto.imagem;
-            document.querySelector('.info-produto h2').innerText = produto.nome;
-            document.querySelector('.info-produto .preco').innerText = `R$ ${produto.preco.toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
-            document.querySelector('.descricao p:last-child').innerText = produto.descricao || "Descrição premium G-LAP.";
+        // ALTERADO: Agora usa .imagem_url que vem do banco de dados
+        document.querySelector('.produto-detalhes img').src = produto.imagem_url;
+        document.querySelector('.info-produto h2').innerText = produto.nome;
+        document.querySelector('.info-produto .preco').innerText = `R$ ${produto.preco.toLocaleString('pt-br', {minimumFractionDigits: 2})}`;
+        document.querySelector('.descricao p:last-child').innerText = produto.descricao || "Descrição premium G-LAP.";
 
-            // Configura o botão comprar
-            document.querySelector('.comprar').onclick = () => {
-                adicionarAoCarrinho(produto);
-                window.location.href = 'carrinho.html';
-            };
-        } catch (erro) { console.error("Erro:", erro); }
-    }
+        document.querySelector('.comprar').onclick = () => {
+            // No carrinho, mantemos o nome 'imagem' para compatibilidade
+            const prodParaCarrinho = { ...produto, imagem: produto.imagem_url };
+            adicionarAoCarrinho(prodParaCarrinho);
+            window.location.href = 'carrinho.html';
+        };
+    } catch (erro) { console.error("Erro:", erro); }
+}
 
     function adicionarAoCarrinho(produto) {
         let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];

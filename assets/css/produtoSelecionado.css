@@ -11,7 +11,7 @@ body {
 }
 
 #g-lap-logo {
-  height: 350px;
+  height: 150px;
 }
 
 header {
@@ -181,39 +181,43 @@ header {
   border-radius: 6px;
 }
 
+/* --- FOOTER --- */
 footer {
-  background-color: #222;
-  color: white;
-  padding: 30px 15%;
-  margin-top: 40px;
+    background-color: #111;
+    color: white;
+    padding: 40px 10%;
+    margin-top: 50px;
 }
 
-.footer-sections {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+.links {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
-.footer-sections h4 {
-  margin-bottom: 10px;
-}
-
-.footer-sections ul {
-  list-style: none;
-}
-
-.footer-sections li {
-  margin-bottom: 5px;
-  font-size: 0.9rem;
-}
-
-.footer-sections img {
-  width: 50px;
-  margin: 5px;
+footer h4 {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #0048ff;
+    width: fit-content;
 }
 
 footer p {
-  text-align: center;
-  font-size: 0.8rem;
-  color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #ccc;
+}
+
+footer img {
+    height: 25px;
+    margin: 5px 10px 5px 0;
+    filter: brightness(1.5);
+}
+
+footer > p {
+    text-align: center;
+    border-top: 1px solid #333;
+    margin-top: 30px;
+    padding-top: 20px;
+    color: #777;
 }

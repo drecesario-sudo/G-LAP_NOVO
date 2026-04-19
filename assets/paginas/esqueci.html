@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - G-LAP</title>
+    <title>Recuperar Senha - G-LAP</title>
     <link rel="stylesheet" href="/assets/css/esqueci.css">
 </head>
 <body>
@@ -20,68 +20,52 @@
 
     <main>
         <section class="login-container">
-            <h2>Entrar na sua conta</h2>
-            <p>Bem-vindo de volta! Faça login para continuar comprando.</p>
+            <h2>Redefinir Senha</h2>
+            <p>Digite seu e-mail e a nova senha desejada.</p>
 
-            <form action="#" method="post" class="login-form">
-                <label for="senhaAntiga">Senha antiga</label>
-                <input type="password" id="senhaAntiga" name="senhaAntiga" placeholder="Digite sua senha antiga" required autocomplete="current-password">
+            <form id="formEsqueci" class="login-form">
+                <label for="emailRecuperar">E-mail da Conta</label>
+                <input type="email" id="emailRecuperar" placeholder="Seu e-mail cadastrado" required>
 
-                <label for="senhaNova">Senha Nova</label>
-                <input type="password" id="senhaSenhaNova" name="senhaNova" placeholder="Digite sua senha" required autocomplete="new-password" >
+                <label for="senhaNova">Nova Senha</label>
+                <input type="password" id="senhaNova" placeholder="Digite a nova senha" required>
 
-                <label for="senhaNovaRep">Senha Nova</label>
-                <input type="password" id="senhaNovaRep" name="senhaNovaRep" placeholder="Digite sua senha" required autocomplete="new-password" >
-                <button type="submit" class="login-btn">Entrar</button>
+                <label for="senhaNovaRep">Repetir Nova Senha</label>
+                <input type="password" id="senhaNovaRep" placeholder="Repita a nova senha" required>
+
+                <button type="submit" class="login-btn">Atualizar Senha</button>
 
                 <div class="links">
-                    <a href="/assets/paginas/">Esqueceu a senha?</a>
+                    <a href="/assets/paginas/login.html">Voltar para Login</a>
                     <a href="/assets/paginas/cadastro.html">Criar nova conta</a>
                 </div>
             </form>
         </section>
     </main>
 
-    <footer>
-        <p>© 2025 G-LAP Informática — Todos os direitos reservados</p>
-    </footer>
-
     <script>
-    const loginForm = document.querySelector('.login-form');
+        document.getElementById('formEsqueci').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('emailRecuperar').value;
+            const novaSenha = document.getElementById('senhaNova').value;
+            const repSenha = document.getElementById('senhaNovaRep').value;
 
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Impede a página de recarregar
+            if (novaSenha !== repSenha) return alert("As senhas não conferem!");
 
-        const email = document.getElementById('email').value;
-        const senha = document.getElementById('senha').value;
+            try {
+                const resposta = await fetch('http://localhost:3000/api/clientes/reset-senha', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, novaSenha })
+                });
 
-        try {
-            const resposta = await fetch('http://localhost:3000/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, senha })
-            });
-
-            const resultado = await resposta.json();
-
-            if (resposta.ok) {
-                // ✅ SUCESSO: Guardamos o Token e o nome do cliente no localStorage
-                localStorage.setItem('glap_token', resultado.token);
-                localStorage.setItem('glap_user', resultado.cliente);
-
-                alert(`Bem-vindo de volta, ${resultado.cliente}!`);
-                
-                // Redireciona para a página inicial
-                window.location.href = 'index.html';
-            } else {
-                // ❌ ERRO: E-mail ou senha inválidos
-                alert(resultado.mensagem || "Erro ao fazer login.");
+                const resultado = await resposta.json();
+                alert(resultado.mensagem);
+                if (resposta.ok) window.location.href = 'login.html';
+            } catch (erro) {
+                alert("Erro ao processar solicitação.");
             }
-        } catch (erro) {
-            console.error("Erro na conexão:", erro);
-            alert("Não foi possível conectar ao servidor.");
-        }
-    });
-</script>
+        });
+    </script>
 </body>
 </html>

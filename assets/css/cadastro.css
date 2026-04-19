@@ -16,20 +16,25 @@ body {
 
 /* ======== CABEÇALHO ======== */
 header {
-    background-color: #111;
-    padding: 15px 50px;
+    height: 15vh;
+    background:linear-gradient(to right, #ffff, #B9D0EB, #1B78BF, #353FF2);
+    color: #fff;
     display: flex;
-    justify-content: center;
-    border-bottom: 2px solid #1f1f1f;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+#g-lap-logo {
+    height: 150px;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
-    width: 100%;
     max-width: 1200px;
     align-items: center;
 }
+
 
 .logo {
     font-size: 1.6em;
@@ -69,3 +74,115 @@ header {
     background-color: #005fcc;
 }
 
+/* ========= CADASTRO ======== */
+
+/* ======== LOGIN ======== */
+.login-container {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 420px;
+    margin: 100px auto;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(77, 184, 255, 0.2);
+    text-align: center;
+}
+
+.login-container h2 {
+    color: #4db8ff;
+    margin-bottom: 10px;
+}
+
+.login-container p {
+    color: #1f1f1f;
+    font-size: 0.9em;
+    margin-bottom: 25px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #aaa;
+}
+
+input {
+    background-color: #ffffff;
+    border: 1px solid black;
+    border-radius: 8px;
+    border-color: #111;
+    padding: 10px;
+    color: black;
+    font-size: 0.95em;
+    margin-bottom: 20px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #4db8ff;
+    box-shadow: 0 0 8px rgba(77, 184, 255, 0.4);
+}
+
+.login-btn {
+    background-color: #0078ff;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #005fcc;
+    box-shadow: 0 0 12px rgba(77, 184, 255, 0.4);
+}
+
+.links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.links a {
+    color: #4db8ff;
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.links a:hover {
+    color: #005fcc;
+}
+
+/* ======== RODAPÉ ======== */
+footer {
+    background-color: #111;
+    text-align: center;
+    padding: 25px;
+    margin-top: 80px;
+    color: #aaa;
+    font-size: 0.9em;
+    border-top: 1px solid #1f1f1f;
+}
+
+/* ======== RESPONSIVO ======== */
+@media (max-width: 500px) {
+    .login-container {
+        margin: 60px auto;
+        padding: 30px;
+    }
+
+    .links {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+}
